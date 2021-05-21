@@ -37,13 +37,21 @@ public class NoteActivity extends AppCompatActivity {
         //create array adapter
         ArrayAdapter<NoteInfo> noteInfoArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, noteTitles);
         noteList.setAdapter(noteInfoArrayAdapter);
-
         noteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent noteContent = new Intent(NoteActivity.this, MainActivity.class);
                 noteContent.putExtra(MainActivity.NOTE_INFO, notes.get(position));
+                startActivity(noteContent);
+            }
+        });
+
+        FloatingActionButton fab = findViewById(R.id.add_note_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent noteContent = new Intent(NoteActivity.this, MainActivity.class);
                 startActivity(noteContent);
             }
         });

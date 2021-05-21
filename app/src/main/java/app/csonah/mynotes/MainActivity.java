@@ -39,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
         spinner.setAdapter(coursesAdapter);
         NoteInfo data = getPassedExtra();
 
+        if(data != null){
+            displayNote(data);
+        }
+
+    }
+
+    private void displayNote(NoteInfo data) {
         EditText title = findViewById(R.id.text_note_title);
         EditText content = findViewById(R.id.text_note_text);
 
