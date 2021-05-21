@@ -26,7 +26,7 @@ public class NoteActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        List<NoteInfo> notes = DataManager.getInstance().getNotes();
+        final List<NoteInfo> notes = DataManager.getInstance().getNotes();
         List<String> noteTitles = new ArrayList();
         for(int i = 0; i < notes.size(); i++){
             noteTitles.add(notes.get(i).getTitle());
@@ -41,7 +41,9 @@ public class NoteActivity extends AppCompatActivity {
         noteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 Intent noteContent = new Intent(NoteActivity.this, MainActivity.class);
+                noteContent.putExtra(MainActivity.NOTE_INFO, notes.get(position));
                 startActivity(noteContent);
             }
         });

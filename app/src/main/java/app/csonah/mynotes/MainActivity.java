@@ -1,5 +1,6 @@
 package app.csonah.mynotes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,14 +11,17 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.List;
 
 import app.csonah.mynotes.models.CourseInfo;
 import app.csonah.mynotes.models.DataManager;
+import app.csonah.mynotes.models.NoteInfo;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String NOTE_INFO = "NOTE_INFO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,20 @@ public class MainActivity extends AppCompatActivity {
         coursesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(coursesAdapter);
+        NoteInfo data = getPassedExtra();
+
+        EditText title = findViewById(R.id.text_note_title);
+        EditText content = findViewById(R.id.text_note_text);
+
+        title.setText(data.getTitle());
+        content.setText(data.getText());
+    }
+
+    private NoteInfo getPassedExtra() {
+        Intent i = getIntent();
+        NoteInfo data = i.getParcelableExtra(NOTE_INFO);
+        return data;
+
     }
 
     @Override
